@@ -1,0 +1,98 @@
+{
+  "national": {
+    "pathways": 7104965,
+    "pct_within_18": 65.853,
+    "median_weeks": 12.188,
+    "p92_weeks": 37.75,
+    "over_52": 113490,
+    "over_65": 14469,
+    "over_78": 3094,
+    "over_104": 648
+  },
+  "part_totals": {
+    "Part_1A": 311884,
+    "Part_1B": 1296673,
+    "Part_2": 7104965,
+    "Part_2A": 1198923,
+    "Part_3": 1903415
+  },
+  "unknown_clock_start": {
+    "Part_1A": 86,
+    "Part_1B": 830
+  },
+  "providers_total": 526,
+  "providers_benchmarked": 267,
+  "benchmarked_by_sector": {
+    "NHS trust": 134,
+    "Independent sector / other": 133
+  },
+  "england_oe": 1.0,
+  "national_rate": 0.6585296338546355,
+  "tau_sd_pp": {
+    "Independent sector / other|raw": 11.259597495046968,
+    "Independent sector / other|adj": 12.71325752487093,
+    "NHS trust|raw": 4.134395081186648,
+    "NHS trust|adj": 4.175741234406256
+  },
+  "od_flags_adj_by_sector": {
+    "Independent sector / other": {
+      "above 95%": 12,
+      "above 99.8%": 3,
+      "below 95%": 0,
+      "below 99.8%": 0,
+      "within 95%": 118
+    },
+    "NHS trust": {
+      "above 95%": 11,
+      "above 99.8%": 10,
+      "below 95%": 4,
+      "below 99.8%": 2,
+      "within 95%": 107
+    }
+  },
+  "od_flags_raw_by_sector": {
+    "Independent sector / other": {
+      "above 95%": 21,
+      "above 99.8%": 0,
+      "below 95%": 0,
+      "below 99.8%": 0,
+      "within 95%": 112
+    },
+    "NHS trust": {
+      "above 95%": 5,
+      "above 99.8%": 14,
+      "below 95%": 4,
+      "below 99.8%": 2,
+      "within 95%": 109
+    }
+  },
+  "outside_99.8_binomial_raw": 227,
+  "outside_99.8_od_raw": 16,
+  "outside_99.8_od_adj": 15,
+  "flagged_raw_od_but_inside_after_adjustment": 4,
+  "newly_flagged_after_adjustment": 3,
+  "top20_max_abs_shift": 1,
+  "top20_n_moved": 6,
+  "all_trusts_n": 134,
+  "all_trusts_moved_5plus": 54,
+  "all_trusts_max_abs_shift": 40,
+  "expected_rate_range_trusts": [
+    0.6086724433555597,
+    0.8041227908637884
+  ],
+  "expected_rate_range_all": [
+    0.5562949143581332,
+    0.8041227908637884
+  ],
+  "raw_rate_sd": 0.11133789511506594,
+  "adj_rate_sd": 0.11040834968038417,
+  "top10_share_52plus_pct": 36.50982465415455,
+  "checks": {
+    "c999_mismatches": 0,
+    "bands_vs_total_all_mismatches": 0,
+    "completed_total_unknown_mismatches": 0,
+    "part2a_gt_part2": 1,
+    "negatives": 0,
+    "single_period": true
+  }
+}

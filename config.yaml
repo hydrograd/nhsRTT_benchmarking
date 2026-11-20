@@ -1,0 +1,35 @@
+# NHS RTT benchmarking configuration
+period: RTT-September-2026
+raw_csv: data/raw/20260930-RTT-September-2026-full-extract.csv
+processed_dir: data/processed
+outputs_dir: outputs
+
+# NHS England "Full CSV data file" zip for the period (commissioner-based, all specialties).
+# Check the RTT 2026-27 data page if this link moves.
+download_url: https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/2026/11/Full-CSV-data-file-Sep26-ZIP-3M-ojyW5x.zip
+
+benchmark:
+  min_list_size: 1000        # providers below this are excluded from funnel/rankings
+  limits:
+    "95%": 1.96
+    "99.8%": 3.09
+  top_n_slope: 20            # largest NHS trusts in the rank-shift chart
+
+published:                   # NHS England Sept 2026 press notice (reported, no estimates)
+  incomplete_pathways: 7074324
+  pct_within_18: 65.9
+  median_weeks: 12.2
+  p92_weeks: 37.7
+  completed_admitted: 310574
+  completed_non_admitted: 1292093
+  new_periods: 1896640
+
+missing_trusts:              # submitted no September 2026 data (per brief / press notice)
+  - Sheffield Teaching Hospitals NHS Foundation Trust
+  - Nottingham University Hospitals NHS Trust
+  # add the remaining four from the press notice
+
+known_data_issues:
+  # Providers where Part_2A (incomplete, decision to admit) exceeds Part_2 in the source file.
+  # Regency Eye Hospital: commissioner 14L has 3 Part_2A pathways but no Part_2 row (7 vs 6 overall).
+  part2a_exceeds_part2: [AW7]
