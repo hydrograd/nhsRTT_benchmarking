@@ -1,4 +1,8 @@
-# nhs-rtt-benchmarking
+# NHS RTT waiting-list benchmarking
+
+[![CI](https://github.com/hydrograd/nhsRTT_benchmarking/actions/workflows/ci.yml/badge.svg)](https://github.com/hydrograd/nhsRTT_benchmarking/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/python-3.12-blue)
+![Data](https://img.shields.io/badge/data-OGL%20v3.0-lightgrey)
 
 **Is a trust's 18-week performance about the trust, or about its specialty mix and its size?**
 
@@ -70,6 +74,28 @@ There are 526 providers in the file. 267 have at least 1,000 pathways and are be
 
 Full write-up: [REPORT.md](REPORT.md).
 
+## Dashboard
+
+![Provider Records dashboard](outputs/figures/dashboard.jpg)
+
+`app.py` is a Streamlit dashboard styled as a provider records system. Look up any of the 267 benchmarked providers by org code or name to see:
+
+- **Provider record:** org code, peer group, list size, number of specialties, rank within the peer group (raw → adjusted) and O/E ratio, with funnel-status flags.
+- **Readings:** raw rate, the rate expected from specialty mix, the adjusted rate and the England benchmark.
+- **Funnel position:** where the provider sits against its peer group's overdispersion-adjusted 95% and 99.8% limits. Hover over any point to see that provider.
+- **Specialty breakdown:** the provider's gap to the England rate in each specialty, with list share.
+- **Record fields:** every derived value with its definition, exportable as CSV.
+
+The sidebar filters providers by peer group (NHS trust or independent sector) and by funnel flag.
+
+The app reads only the small committed tables in `outputs/tables/`, so it runs without the 83 MB extract:
+
+```bash
+streamlit run app.py
+```
+
+<!-- Live app: add the streamlit.app link here once deployed -->
+
 ## Data traps handled (each has a test in `tests/test_data_traps.py`)
 
 | Trap | Handling |
@@ -120,16 +146,26 @@ src/rtt/metrics.py       % within 18 weeks, interpolated percentiles, long waits
 src/rtt/benchmark.py     funnel limits, overdispersion, indirect standardisation, rank shift
 src/rtt/plots.py         charts
 tests/                   method tests (synthetic) and data-trap tests (real extract)
-app.py                   Streamlit: pick a provider, see raw vs adjusted and a specialty breakdown
-outputs/                 tables (CSV), figures (PNG), summary.json
+app.py                   Streamlit dashboard (provider records view)
+.streamlit/config.toml   dashboard theme
+.github/workflows/ci.yml downloads the extract and runs the tests on every push
+outputs/                 tables (CSV), figures, summary.json
 ```
 
 ## Reproduce
+
+Requires Python 3.12.
 
 ```bash
 pip install -r requirements.txt
 python scripts/download.py        # or copy the CSV into data/raw/
 python scripts/run_analysis.py
-python -m pytest -q
+python -m pytest -q                # 19 tests: methods + one per data trap
 streamlit run app.py
 ```
+
+CI runs the same steps on GitHub Actions, including the download, so the data-trap tests run against the real extract.
+
+## Licence and data
+
+The data is © NHS England, published under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). It is aggregate statistics only, with no patient-level data. Source: NHS England, *Referral to Treatment (RTT) Waiting Times*, September 2026 full CSV extract.
